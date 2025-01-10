@@ -6,14 +6,12 @@
 #define FILENAME "users.txt"
 #define MAX_USERS 100
 
-// User structure
 typedef struct {
     int id;
     char name[50];
     int age;
 } User;
 
-// Function to ensure the file exists
 void ensureFileExists() {
     FILE *file = fopen(FILENAME, "a");
     if (file == NULL) {
@@ -23,12 +21,10 @@ void ensureFileExists() {
     fclose(file);
 }
 
-// Function to read a user from the file
 int readUserData(FILE *file, User *user) {
     return fscanf(file, "%d,%49[^,],%d\n", &user->id, user->name, &user->age);
 }
 
-// Function to validate integer input
 int getIntInput(const char *prompt) {
     int value;
     char buffer[20];
@@ -44,7 +40,6 @@ int getIntInput(const char *prompt) {
     }
 }
 
-// Function to validate the user's name (only alphabets and spaces allowed)
 int isValidName(const char *name) {
     for (int i = 0; name[i] != '\0'; i++) {
         if (!isalpha(name[i]) && name[i] != ' ') {
@@ -54,7 +49,6 @@ int isValidName(const char *name) {
     return 1;
 }
 
-// Function to check if the user ID is unique
 int isUserIdUnique(User *users, int userCount, int userId) {
     for (int i = 0; i < userCount; i++) {
         if (users[i].id == userId) {
@@ -64,7 +58,7 @@ int isUserIdUnique(User *users, int userCount, int userId) {
     return 1;  
 }
 
-// Function to write all user data to the file
+
 void writeUsersToFile(User *users, int userCount) {
     FILE *file = fopen(FILENAME, "w");
     if (file == NULL) {
@@ -78,7 +72,7 @@ void writeUsersToFile(User *users, int userCount) {
     fclose(file);
 }
 
-// Function to display all users
+
 void displayAllUsers(User *users, int userCount) {
     if (userCount == 0) {
         printf("No users found.\n");
@@ -91,7 +85,6 @@ void displayAllUsers(User *users, int userCount) {
     }
 }
 
-// Function to add a new user
 void addUser(User *users, int *userCount) {
     User newUser;
     printf("\nAdd New User:\n");
@@ -121,12 +114,10 @@ void addUser(User *users, int *userCount) {
     users[*userCount] = newUser;
     (*userCount)++;
 
-    // Write the updated user list to file
     writeUsersToFile(users, *userCount);
     printf("User added successfully.\n");
 }
 
-// Function to update user details
 void updateUserDetails(User *users, int userCount) {
     int targetId;
     int found = 0;
@@ -134,7 +125,6 @@ void updateUserDetails(User *users, int userCount) {
     printf("\nUpdate User:\n");
     targetId = getIntInput("Enter User ID to Update: ");
 
-    // Search for the user and update their details
     for (int i = 0; i < userCount; i++) {
         if (users[i].id == targetId) {
             found = 1;
@@ -156,12 +146,12 @@ void updateUserDetails(User *users, int userCount) {
         return;
     }
 
-    // Write the updated user list to file
+    
     writeUsersToFile(users, userCount);
     printf("User details updated successfully.\n");
 }
 
-// Function to delete a user by ID
+
 void deleteUserById(User *users, int *userCount) {
     int targetId;
     int found = 0;
@@ -169,7 +159,7 @@ void deleteUserById(User *users, int *userCount) {
     printf("\nDelete User:\n");
     targetId = getIntInput("Enter User ID to Delete: ");
 
-    // Find the user to delete
+    
     for (int i = 0; i < *userCount; i++) {
         if (users[i].id == targetId) {
             found = 1;
@@ -189,7 +179,7 @@ void deleteUserById(User *users, int *userCount) {
         return;
     }
 
-    // Write the updated user list to file
+    
     writeUsersToFile(users, *userCount);
     printf("User deleted successfully.\n");
 }
@@ -206,7 +196,6 @@ int main() {
     User users[MAX_USERS];
     int userCount = 0;
 
-    // Load users from the file
     while (readUserData(file, &users[userCount]) != EOF && userCount < MAX_USERS) {
         userCount++;
     }

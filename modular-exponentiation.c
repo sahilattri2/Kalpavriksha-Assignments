@@ -1,5 +1,4 @@
 #include <stdio.h>
-// Reads and validates user input based on a minimum value
 long long readAndValidateInput(const char *prompt, long long minValue)
  {
     long long value;
@@ -22,7 +21,6 @@ long long readAndValidateInput(const char *prompt, long long minValue)
     return value;
 }
 
-// calculates (base^exponent) % modulus
 long long modularExponentiation(long long base, long long exponent, long long modulus)
  {
     if (modulus == 1) 

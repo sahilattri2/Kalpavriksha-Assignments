@@ -26,12 +26,11 @@ int isEmpty(Queue* q)
  
 int isFull(Queue* q) 
 {
-    int flag=0;
     if(q->rear == MAX - 1)
     {
-        flag=1;
+        return 1;
     }
-    return flag ;
+    return 0 ;
 }
  
 void enqueue(Queue* q, int data) 

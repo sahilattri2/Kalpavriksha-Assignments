@@ -130,7 +130,9 @@ int main()
                 {
                     printf("queue is empty.");
                 }
+             else{
                 break;
+             }
             case 7:
                 exit(0);
             default:

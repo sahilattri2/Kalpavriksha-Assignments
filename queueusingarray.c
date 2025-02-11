@@ -17,12 +17,11 @@ void initQueue(Queue* q)
  
 int isEmpty(Queue* q) 
 {
-    int flag=0;
     if(q->front==-1)
     {
-        flag=1;
+     return 1;
     }
-    return flag;
+    return 0;
 }
  
 int isFull(Queue* q) 
